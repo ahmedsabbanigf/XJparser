@@ -6,7 +6,7 @@ XML to JSON parser. Made for a class project in the university <a href="http://w
 <b>Contributors:</b><br>
 Abbes Mohammed<br>
 Babic Benjamin <br>
-BoutonnéValentin<br>
+Boutonné Valentin<br>
 Sabbani Ahmed<br>
 Tahania<br>
 
