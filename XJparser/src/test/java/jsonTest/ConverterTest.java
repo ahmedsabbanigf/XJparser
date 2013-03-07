@@ -16,38 +16,15 @@
  * permissions and limitations under the License.
  */
 
-package xml;
-
-import java.io.File;
-import java.util.logging.Logger;
-
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.input.SAXBuilder;
+/**
+ *
+ */
+package jsonTest;
 
 /**
- * 
- * @author Benjamin Babic
+ *
+ * @author Ben
  */
-public class Converter {
-	private static Logger logger = Logger.getLogger("Parser");
-	private static Document document;
-	private static Element racine;
+public class ConverterTest {
 
-	/**
-	 * Creator
-	 */
-	public Converter() {
-		SAXBuilder sxb = new SAXBuilder();
-		try {
-			document = sxb.build(new File("Exercice2.xml"));
-		} catch (Exception e) {
-			logger.warning(e.toString());
-		}
-		racine = document.getRootElement();
-	}
-	
-	public void convert(){
-		
-	}
 }
