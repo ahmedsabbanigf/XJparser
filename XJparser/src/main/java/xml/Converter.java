@@ -18,36 +18,57 @@
 
 package xml;
 
-import java.io.File;
-import java.util.logging.Logger;
+		
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.input.SAXBuilder;
+import net.sf.json.JSON;
+import net.sf.json.JSONSerializer;
+import net.sf.json.xml.XMLSerializer;
 
-/**
- * 
- * @author Benjamin Babic
- */
 public class Converter {
-	private static Logger logger = Logger.getLogger("Parser");
-	private static Document document;
-	private static Element racine;
+	
+	String input;
+	String output;
+	
+	private final String getFileAsString(String path)
+			throws FileNotFoundException {
+		FileInputStream fis = new FileInputStream(path);
+		String inputStreamString = new Scanner(fis, "UTF-8")
+				.useDelimiter("\\A").next();
 
-	/**
-	 * Creator
-	 */
-	public Converter() {
-		SAXBuilder sxb = new SAXBuilder();
-		try {
-			document = sxb.build(new File("Exercice2.xml"));
-		} catch (Exception e) {
-			logger.warning(e.toString());
-		}
-		racine = document.getRootElement();
+		return inputStreamString;
 	}
 	
-	public void convert(){
-		
+	public final String convert(final String path, final boolean typeHints)
+			throws FileNotFoundException {
+		input = getFileAsString(path);
+
+		XMLSerializer serializer = new XMLSerializer();
+		JSON json = serializer.read( input );
+		output = json.toString(2);
+
+		return output;
+	}
+	
+	public final boolean save(String path) {
+		FileWriter fstream;
+		BufferedWriter out;
+		boolean sucess = false;
+		try {
+			fstream = new FileWriter(path);
+			out = new BufferedWriter(fstream);
+			out.write(output);
+			out.close();
+			sucess = true;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return sucess;
 	}
 }

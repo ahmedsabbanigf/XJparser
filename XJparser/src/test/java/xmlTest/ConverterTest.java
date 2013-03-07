@@ -16,14 +16,44 @@
  * permissions and limitations under the License.
  */
 
+/**
+ *
+ */
 package xmlTest;
 
-import junit.framework.TestCase;
+import java.io.FileNotFoundException;
+
+import xml.Converter;
+
+import org.junit.Test;
+
 
 /**
  *
- * @author Benjamin Babic
+ * @author Ben
  */
-public class ConcerterTest extends TestCase {
+public class ConverterTest{
 
+	@Test
+	public void convertTest(){
+		Converter converter = new Converter();
+		String s = "";
+		try {
+			s = converter.convert("../test.xml",false);
+			System.out.println(s);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void saveTest(){
+		Converter converter = new Converter();
+		try {
+			converter.convert("../test.xml",false);
+			converter.save("../test.json");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 }
