@@ -21,10 +21,11 @@
  */
 package json;
 
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import net.sf.json.JSON;
@@ -37,20 +38,24 @@ import net.sf.json.xml.XMLSerializer;
  */
 public class Converter {
 
+	String input;
+	String output;
+
 	/**
 	 * 
 	 * @param path
 	 *            relative path of the file to convert.
-	 * @return 
-	 * @throws FileNotFoundException 
+	 * @return
+	 * @throws FileNotFoundException
 	 */
-	public final String convert(final String path) throws FileNotFoundException {
-		String input = getFileAsString(path);
+	public final String convert(final String path, final boolean typeHints)
+			throws FileNotFoundException {
+		input = getFileAsString(path);
 
 		XMLSerializer serializer = new XMLSerializer();
-
+		serializer.setTypeHintsEnabled(typeHints);
 		JSON serializedInput = JSONSerializer.toJSON(input);
-		String output = serializer.write(serializedInput);
+		output = serializer.write(serializedInput);
 
 		return output;
 	}
@@ -65,11 +70,26 @@ public class Converter {
 	 */
 	private final String getFileAsString(String path)
 			throws FileNotFoundException {
-		FileInputStream fis = new FileInputStream("c:/sample.txt");
+		FileInputStream fis = new FileInputStream(path);
 		String inputStreamString = new Scanner(fis, "UTF-8")
 				.useDelimiter("\\A").next();
 
 		return inputStreamString;
+	}
 
+	public final boolean save(String path) {
+		FileWriter fstream;
+		BufferedWriter out;
+		boolean sucess = false;
+		try {
+			fstream = new FileWriter(path);
+			out = new BufferedWriter(fstream);
+			out.write(output);
+			out.close();
+			sucess = true;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return sucess;
 	}
 }

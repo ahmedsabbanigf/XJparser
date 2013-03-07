@@ -21,10 +21,39 @@
  */
 package jsonTest;
 
+import java.io.FileNotFoundException;
+
+import json.Converter;
+
+import org.junit.Test;
+
+
 /**
  *
  * @author Ben
  */
-public class ConverterTest {
+public class ConverterTest{
 
+	@Test
+	public void convertTest(){
+		Converter converter = new Converter();
+		String s = "";
+		try {
+			s = converter.convert("../test.json",false);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		System.out.println(s);
+	}
+	
+	@Test
+	public void saveTest(){
+		Converter converter = new Converter();
+		try {
+			converter.convert("../test.json",false);
+			converter.save("../test.xml");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 }
