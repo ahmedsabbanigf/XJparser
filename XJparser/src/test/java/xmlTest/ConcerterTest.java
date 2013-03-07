@@ -24,6 +24,6 @@ import junit.framework.TestCase;
  *
  * @author Benjamin Babic
  */
-public class XMLParserTest extends TestCase {
+public class ConcerterTest extends TestCase {
 
 }
