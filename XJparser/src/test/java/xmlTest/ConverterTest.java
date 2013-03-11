@@ -24,6 +24,7 @@ package xmlTest;
 import java.io.FileNotFoundException;
 
 import xml.Converter;
+import xml.Reader;
 
 import org.junit.Test;
 
@@ -55,5 +56,10 @@ public class ConverterTest{
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void generalTest(){
+		Reader r = new Reader("../test.xml");
 	}
 }

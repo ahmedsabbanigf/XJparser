@@ -19,6 +19,8 @@
 package xml;
 
 		
+import generique.Generique;
+
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,20 +33,7 @@ import net.sf.json.JSON;
 import net.sf.json.JSONSerializer;
 import net.sf.json.xml.XMLSerializer;
 
-public class Converter {
-	
-	String input;
-	String output;
-	
-	private final String getFileAsString(String path)
-			throws FileNotFoundException {
-		FileInputStream fis = new FileInputStream(path);
-		String inputStreamString = new Scanner(fis, "UTF-8")
-				.useDelimiter("\\A").next();
-
-		return inputStreamString;
-	}
-	
+public class Converter extends Generique {
 	public final String convert(final String path, final boolean typeHints)
 			throws FileNotFoundException {
 		input = getFileAsString(path);
@@ -54,21 +43,5 @@ public class Converter {
 		output = json.toString(2);
 
 		return output;
-	}
-	
-	public final boolean save(String path) {
-		FileWriter fstream;
-		BufferedWriter out;
-		boolean sucess = false;
-		try {
-			fstream = new FileWriter(path);
-			out = new BufferedWriter(fstream);
-			out.write(output);
-			out.close();
-			sucess = true;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return sucess;
 	}
 }

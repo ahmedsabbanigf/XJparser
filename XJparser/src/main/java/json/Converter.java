@@ -21,6 +21,8 @@
  */
 package json;
 
+import generique.Generique;
+
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -33,19 +35,15 @@ import net.sf.json.JSONSerializer;
 import net.sf.json.xml.XMLSerializer;
 
 /**
- * 
  * @author Ben
  */
-public class Converter {
-
-	String input;
-	String output;
+public class Converter extends Generique {
 
 	/**
-	 * 
 	 * @param path
+	 * @param typeHints
 	 *            relative path of the file to convert.
-	 * @return
+	 * @return String
 	 * @throws FileNotFoundException
 	 */
 	public final String convert(final String path, final boolean typeHints)
@@ -58,38 +56,5 @@ public class Converter {
 		output = serializer.write(serializedInput);
 
 		return output;
-	}
-
-	/**
-	 * Extracts the content of a UTF-8 file as a string.
-	 * 
-	 * @param path
-	 *            location of the file
-	 * @return the string representing the content of the file in the given path
-	 * @throws FileNotFoundException
-	 */
-	private final String getFileAsString(String path)
-			throws FileNotFoundException {
-		FileInputStream fis = new FileInputStream(path);
-		String inputStreamString = new Scanner(fis, "UTF-8")
-				.useDelimiter("\\A").next();
-
-		return inputStreamString;
-	}
-
-	public final boolean save(String path) {
-		FileWriter fstream;
-		BufferedWriter out;
-		boolean sucess = false;
-		try {
-			fstream = new FileWriter(path);
-			out = new BufferedWriter(fstream);
-			out.write(output);
-			out.close();
-			sucess = true;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return sucess;
 	}
 }

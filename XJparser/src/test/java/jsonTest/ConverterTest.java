@@ -35,7 +35,7 @@ import org.junit.Test;
 public class ConverterTest{
 
 	@Test
-	public void convertTest(){
+	public final void convertTest(){
 		Converter converter = new Converter();
 		String s = "";
 		try {
@@ -47,7 +47,7 @@ public class ConverterTest{
 	}
 	
 	@Test
-	public void saveTest(){
+	public final void saveTest(){
 		Converter converter = new Converter();
 		try {
 			converter.convert("../test.json",false);
